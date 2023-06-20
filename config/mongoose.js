@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://ayushsaxena38:Ayush%4012345@cluster0.dwrztdb.mongodb.net/',{
+const env = require('dotenv').config();
+const logger = require('./logger');
+mongoose.connect( process.env.MONGO_URI,{
     useNewUrlParser : true,
     useUnifiedTopology : true
 });
@@ -12,5 +13,6 @@ db.on('error',console.error.bind(console,'error connecting to db'));
 
 //when the connection is successfully established the db.onse() will notify by showing this message.
 db.once('open',function(){
-    console.log('successfully connected to the data base')
+    console.log('successfully connected to the data base');
+    logger.info('successfully connected to the data base')
 });
